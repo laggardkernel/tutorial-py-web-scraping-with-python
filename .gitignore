@@ -26,5 +26,12 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Virtual Environment
+venv
+.pyenv-version
+.python-version
+
 # IDE
 .idea
+
+*.log
