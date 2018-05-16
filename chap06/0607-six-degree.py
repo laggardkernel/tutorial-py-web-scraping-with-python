@@ -46,7 +46,7 @@ def visit(pageId):
 
 
 def getLinks(pageUrl, recursionLevel, pages):
-    print(pageUrl)
+    print(recursionLevel, pageUrl)
     if len(pages) % 20 == 0:
         sleep(5)
         # sleep(random.randint(5,60))
