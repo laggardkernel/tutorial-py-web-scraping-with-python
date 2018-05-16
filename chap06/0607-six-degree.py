@@ -47,22 +47,26 @@ def visit(pageId):
 
 def getLinks(pageUrl, recursionLevel, pages):
     print(recursionLevel, pageUrl)
-    if len(pages) % 20 == 0:
-        sleep(5)
-        # sleep(random.randint(5,60))
+    # if len(pages) % 20 == 0:
+    #     sleep(5)
+    #     # sleep(random.randint(5,60))
     if recursionLevel > 4:  # 5, starts with 0
         return None
-    pageId = insertPageIfNotExists(pageUrl)
-    html = urlopen('https://en.wikipedia.org{}'.format(pageUrl), timeout=20)
-    bs = BeautifulSoup(html, 'html.parser')
-    links = bs.findAll('a', href=re.compile('^(/wiki/)((?!:).)*$'))
-    links = [link.attrs['href'] for link in links]
-    for link in links:
-        insertLink(pageId, insertPageIfNotExists(link))
-        if link not in pages:
-            pages.append(link)
-            getLinks(link, recursionLevel + 1, pages)
-    visit(pageId)
+    try:
+        pageId = insertPageIfNotExists(pageUrl)
+        html = urlopen('https://en.wikipedia.org{}'.format(pageUrl), timeout=20)
+        bs = BeautifulSoup(html, 'html.parser')
+        links = bs.findAll('a', href=re.compile('^(/wiki/)((?!:).)*$'))
+        links = [link.attrs['href'] for link in links]
+        for link in links:
+            insertLink(pageId, insertPageIfNotExists(link))
+            if link not in pages:
+                pages.append(link)
+                getLinks(link, recursionLevel + 1, pages)
+        visit(pageId)
+    except Exception as e:
+        print(e)
+        print(recursionLevel, pageUrl)
 
 
 try:
