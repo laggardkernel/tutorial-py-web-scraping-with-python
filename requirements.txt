@@ -5,6 +5,7 @@ jupyter=1.0.0
 lxml==4.2.1
 Pillow=5.1.0
 PyMySQL==0.8.1
+PySocks=1.6.8
 pytesseract=0.2.0
 requests==2.18.4
 Scrapy==1.5.0
